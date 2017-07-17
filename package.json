@@ -1,6 +1,6 @@
 {
   "name": "tplink-smartplug-node",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Port of tplink-smartplug.py",
   "main": "index.js",
   "scripts": {

@@ -7,10 +7,13 @@ function TPLink_SmartHome(ip, connected_cb) {
 	var answer_cb = null;
 	var socket = net.connect(9999, ip, function() {
 		connected = true;
-		if (connected_cb != false) return connected_cb();
+		if (connected_cb != undefined) return connected_cb(null);
 	});
 	socket.on('end', function() {
 		connected = false;
+	});
+	socket.on('error', function(err) {
+		if (connected_cb != undefined) return connected_cb(err);
 	});
 	socket.on('data', function(data) {
 		if (answer_cb == null) return;
