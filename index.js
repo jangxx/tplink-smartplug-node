@@ -18,7 +18,7 @@ class TPLinkSmartPlug {
 			};
 
 			let socket = net.connect(9999, this._address, () => {
-				socket.off("error", errorListener); // remove error listener
+				socket.removeListener("error", errorListener); // remove error listener
 
 				return resolve(socket);
 			});
