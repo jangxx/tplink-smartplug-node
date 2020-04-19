@@ -17,6 +17,9 @@ switch(command) {
 	case "info":
 		tp.query().then(console.log).catch(console.log);
 		break;
+	case "emeter":
+		tp.getEmeterRealtime().then(console.log).catch(console.log);
+		break;
 	default:
 		console.log("Command", command, "is not known");
 		break;

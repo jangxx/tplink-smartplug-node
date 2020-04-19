@@ -82,42 +82,63 @@ class TPLinkSmartPlug {
 
 	/**
 	 * Turn this plug on
-	 * @return {Promise<Object>} A promise reolving to the reply
+	 * @return {Promise<Object>} A promise resolving to the reply
 	 */
 	turnOn() {
-		return this._connect().then(socket => this._send(socket, {
+		return this.raw({
 			system: {
 				set_relay_state: {
 					state: 1
 				}
 			}
-		}));
+		});
 	}
 
 	/**
 	 * Turn this plug off
-	 * @return {Promise<Object>} A promise reolving to the reply
+	 * @return {Promise<Object>} A promise resolving to the reply
 	 */
 	turnOff() {
-		return this._connect().then(socket => this._send(socket, {
+		return this.raw({
 			system: {
 				set_relay_state: {
 					state: 0
 				}
 			}
-		}));
+		});
 	}
 
 	/**
 	 * Queries the plug for it's state
-	 * @return {Promise<Object>} A promise reolving to the reply
+	 * @return {Promise<Object>} A promise resolving to the reply
 	 */
 	query() {
-		return this._connect().then(socket => this._send(socket, {
+		return this.raw({
 			system: {
 				get_sysinfo: {}
 			}
-		}));
+		});
+	}
+
+	/**
+	 * Queries the plug for it's emeter readings
+	 * @return {Promise<Object>} A promise resolving to the reply
+	 */
+	getEmeterRealtime() {
+		return this.raw({
+			emeter: {
+				get_realtime: {}
+			}
+		});
+	}
+
+	/**
+	 * Send a raw query object to the plug and return the reply
+	 * @param {Object} query 
+	 * @return {Promise<Object>} A promise resolving to the reply
+	 */
+	raw(query) {
+		return this._connect().then(socket => this._send(socket, query));
 	}
 }
 

@@ -38,3 +38,9 @@ Turns the plug off. Returns a promise resolving to the reply from the plug.
 
 **query()**  
 Queries the state of the plug. Returns a promise resolving to the reply from the plug.
+
+**getEmeterRealtime()**  
+Get the readings from the Emeter (only supported on HS110).
+
+**raw(query)**  
+Send a raw query object to the plug. A list of valid query objects can be found [here](https://github.com/softScheck/tplink-smartplug/blob/master/tplink-smarthome-commands.txt).
